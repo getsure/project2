@@ -1,0 +1,27 @@
+<div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="sendDataToComp()">
+        <div class="form-group">
+            <label>UserName:</label>
+            <input [class.invalid]="(userForm.get('userName')?.invalid && userForm.get('userName')?.touched)" type="text" class="form-control" formControlName="userName"/>
+            <div *ngIf="userForm.get('userName')?.errors?.['required']" class="text-danger">
+                UserName is required
+            </div>
+            <div *ngIf="userForm.get('userName')?.errors?.['pattern']" class="text-danger">
+                Invalid UserName. Minlength should 5 chars and MaxLength should be 15chars
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="text" class="form-control" formControlName="email"/>
+        </div>
+
+        <div formGroupName="address">
+            <div class="form-group">
+                <label>City:</label>
+                <input type="text" class="form-control" formControlName="city"/>
+            </div>
+        </div><br/>
+        <button [disabled]="!userForm.valid" type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>
